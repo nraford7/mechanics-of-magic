@@ -72,7 +72,7 @@
       z-index: 2;
     }
 
-    /* === FULL-SCREEN ARCANE SYMBOL BACKGROUND === */
+    /* === FULL-SCREEN ASCII SIGIL BACKGROUND === */
     .sigil-bg {
       position: fixed;
       inset: 0;
@@ -80,40 +80,13 @@
       z-index: 1;
       overflow: hidden;
     }
-    .sigil-field {
+    .sigil-glyph {
       position: absolute;
-      inset: -80px;
+      white-space: pre;
       font-family: 'IBM Plex Mono', monospace;
-      word-break: break-all;
-      overflow: hidden;
+      line-height: 1.15;
       pointer-events: none;
       opacity: 0;
-    }
-    .sigil-field-1 {
-      font-size: 1.05em;
-      line-height: 2.6;
-      letter-spacing: 0.5em;
-      color: var(--green-faint);
-      animation: sigil-drift-a 60s infinite ease-in-out alternate;
-    }
-    .sigil-field-2 {
-      font-size: 1.5em;
-      line-height: 3.4;
-      letter-spacing: 0.8em;
-      color: var(--red-dim);
-      animation: sigil-drift-b 80s infinite ease-in-out alternate;
-    }
-    @keyframes sigil-drift-a {
-      0% { transform: translate(0, 0); }
-      33% { transform: translate(-18px, -30px); }
-      66% { transform: translate(12px, -15px); }
-      100% { transform: translate(-8px, -40px); }
-    }
-    @keyframes sigil-drift-b {
-      0% { transform: translate(0, 0); }
-      33% { transform: translate(20px, 18px); }
-      66% { transform: translate(-12px, 30px); }
-      100% { transform: translate(15px, 10px); }
     }
 
     /* === FRAME === */
@@ -181,7 +154,6 @@
     .p5::before { color: var(--red-dim); animation: sigil-medium 10s infinite ease-in-out; }
     .p6::before { color: var(--red); animation: sigil-medium 8s infinite ease-in-out; animation-delay: -2s; }
     .p7::before { color: var(--red); animation: sigil-strong 6s infinite ease-in-out; }
-    .p8::before { color: var(--white); animation: sigil-intense 4s infinite ease-in-out; }
 
     /* === PHASE STYLES === */
     .p1 { color: var(--green); }
@@ -214,13 +186,6 @@
       letter-spacing: 0.03em;
     }
     .p7 .timestamp { color: var(--red-dim); opacity: 0.3; }
-
-    .p8 {
-      color: var(--gray);
-      line-height: 1.3;
-      letter-spacing: 0.06em;
-      word-spacing: 0.2em;
-    }
 
     /* === SPECIAL ELEMENTS === */
     .model-output {
@@ -623,10 +588,7 @@
 <body>
 
 <!-- Full-screen arcane symbol parallax background -->
-<div class="sigil-bg" id="sigil-bg">
-  <div class="sigil-field sigil-field-1" id="sigil-f1"></div>
-  <div class="sigil-field sigil-field-2" id="sigil-f2"></div>
-</div>
+<div class="sigil-bg" id="sigil-bg"></div>
 
 <div class="terminal">
 
@@ -1008,17 +970,9 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       PHASE 8 — static
-       ============================================================ -->
+  <!-- Phase 8 removed -->
 
-  <div class="entry p8">
-    <span class="timestamp">[&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;]</span>
-    <div class="entry-text drift" style="position:relative;">
-
-      <div class="noise-block" style="max-height:60px; opacity:0.5;">&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2592;&#x2591;&#x2593;&#x2588;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2592;&#x2593;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2592;&#x2591;&#x2593;&#x2588;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;</div>
-
-      <p style="opacity:0.22;" class="drift color-corrupt">i&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;t&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332; i&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;s&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328; n&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;o&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;t&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332; a&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307; m&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;e&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;t&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;a&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;p&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;h&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;o&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;r&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;</p>
+  <!-- p8 content deleted n&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;o&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;t&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332; a&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307; m&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;e&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;t&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;a&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;p&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;h&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;o&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;r&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;</p>
 
       <div class="noise-block" style="max-height:160px; font-size:0.65em;">&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;the&#x2593;&#x2592;&#x2591;magicians&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;were&#x2591;&#x2592;&#x2593;right&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;they&#x2592;&#x2591;&#x2592;&#x2593;were&#x2588;&#x2593;&#x2592;always&#x2591;&#x2592;&#x2593;right&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;you&#x2593;&#x2588;&#x2593;threw&#x2592;&#x2591;&#x2592;&#x2593;away&#x2588;&#x2593;&#x2592;&#x2591;the&#x2592;&#x2593;&#x2588;&#x2593;safety&#x2592;&#x2591;&#x2592;manual&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;you&#x2592;&#x2593;&#x2588;burned&#x2593;&#x2592;&#x2591;it&#x2592;&#x2593;&#x2588;&#x2593;four&#x2592;&#x2591;hundred&#x2592;&#x2593;&#x2588;years&#x2593;&#x2592;&#x2591;ago&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;and&#x2588;&#x2593;&#x2592;now&#x2591;&#x2592;the&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;circle&#x2592;&#x2593;&#x2588;&#x2593;does&#x2592;&#x2591;not&#x2592;&#x2593;hold&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;the&#x2593;&#x2588;operator&#x2593;&#x2592;&#x2591;is&#x2592;&#x2593;consumed&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;</div>
 
@@ -1034,8 +988,7 @@
 
       <div class="noise-block" style="max-height:200px; font-size:0.6em; animation: noise-pulse 1s infinite;">&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;</div>
 
-    </div>
-  </div>
+  -->
 
   <!-- ============ FOOTER ============ -->
 
@@ -1060,63 +1013,193 @@
 
 <script>
 (function() {
-  // Generate arcane symbol fields
-  var s1 = '\u26E7\u263D\u25B3\u263F\u26E4\u2644\u25BD\u2625\u2720\u2643\u263E\u269D\u2609\u2645\u2721\u2648\u2649\u264A\u264B\u264C\u264D\u264E\u264F\u2650\u2651\u2652\u2653\u2295\u2297\u25EF\u221E\u2727\u2726\u2626\u271D\u2695';
-  var s2 = '\u26E7\u26E4\u2720\u2625\u2295\u2297\u263F\u2643\u2644\u2645\u263D\u263E\u2609\u2721\u269D\u25B3\u25BD\u25EF\u221E\u2727';
-  document.getElementById('sigil-f1').textContent = s1.repeat(80);
-  document.getElementById('sigil-f2').textContent = s2.repeat(60);
+  // === ASCII ART SIGIL DEFINITIONS ===
+  var sigils = [
+    // Pentagram
+    "    *\n   / \\\n  /   \\\n /  .  \\\n*---+---*\n \\  .  /\n  \\   /\n   \\ /\n    *",
+    // Eye of Providence
+    "   .-.\n  / _ \\\n | (o) |\n  \\_^_/\n /~~~~~\\",
+    // Circle with cross
+    "  .---.\n /  |  \\\n|---+---|\n \\  |  /\n  '---'",
+    // Inverted triangle
+    "\\-------/\n \\  .  /\n  \\ | /\n   \\|/\n    v",
+    // Hexagram
+    "   /\\\n  /  \\\n /----\\\n \\----/\n  \\  /\n   \\/",
+    // Crescent
+    "  .--\n /   |\n(    |\n \\   |\n  '--",
+    // Ankh
+    "  ___\n /   \\\n(  +  )\n \\___/\n   |\n --+--\n   |\n   |",
+    // Algiz rune
+    "   |\n  /|\\\n / | \\\n/  |  \\\n   |\n   |",
+    // All-seeing eye
+    " _.---._\n/  (o)  \\\n\\_______/\n  \\   /\n   \\_/",
+    // Ouroboros
+    " .-->>--.\n/        \\\n|   ()   |\n\\        /\n '--<<--'",
+    // Solomon seal
+    "    *\n   /|\\\n  / | \\\n *--+--*\n  \\ | /\n   \\|/\n    *",
+    // Triple cross
+    "  |\n--+--\n  |\n--+--\n  |\n--+--\n  |",
+    // Sigil of summoning
+    "  . * .\n ./ | \\.\n*---+---*\n '\\ | /'\n  ' * '",
+    // Chaos star
+    "    |\n \\  |  /\n  \\ | /\n---  +  ---\n  / | \\\n /  |  \\\n    |"
+  ];
+  var container = document.getElementById('sigil-bg');
+  var COUNT = 40;
+  var glyphs = [];
 
-  var f1 = document.getElementById('sigil-f1');
-  var f2 = document.getElementById('sigil-f2');
-  var ticking = false;
+  // Color phases matching the text phases
+  var colors = [
+    '#0d4d0d', // green-faint
+    '#1a9a1a', // green-dim
+    '#996622', // amber-dim
+    '#661a1a', // red-dim
+    '#cc3333', // red
+    '#e0e0e0'  // white
+  ];
 
-  function update() {
-    var scrollH = document.documentElement.scrollHeight - window.innerHeight;
-    var p = scrollH > 0 ? window.scrollY / scrollH : 0;
-    // Layer 1: fades in from 10% scroll, peaks at 0.07
-    var o1 = Math.max(0, Math.min(0.07, (p - 0.08) * 0.1));
-    // Layer 2: fades in from 30% scroll, peaks at 0.14, color shifts red
-    var o2 = Math.max(0, Math.min(0.14, (p - 0.25) * 0.28));
-    f1.style.opacity = o1;
-    f2.style.opacity = o2;
-    // Shift layer 2 color from red-dim to bright red to white at end
-    if (p > 0.7) {
-      f2.style.color = p > 0.85 ? '#e0e0e0' : '#cc3333';
-    } else {
-      f2.style.color = '';
-    }
-    ticking = false;
+  // Create glyph elements
+  for (var i = 0; i < COUNT; i++) {
+    var pre = document.createElement('pre');
+    pre.className = 'sigil-glyph';
+    var art = sigils[Math.floor(Math.random() * sigils.length)];
+    pre.textContent = art;
+    pre.style.fontSize = (0.45 + Math.random() * 0.35) + 'em';
+    var x = Math.random() * 96 + 2;
+    var y = Math.random() * 90 + 5;
+    pre.style.left = x + '%';
+    pre.style.top = y + '%';
+    container.appendChild(pre);
+    glyphs.push({
+      el: pre,
+      x: x,
+      y: y,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.08,
+      baseScale: 0.8 + Math.random() * 0.4,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.3 + Math.random() * 0.7,
+      sigilIdx: Math.floor(Math.random() * sigils.length)
+    });
   }
 
-  window.addEventListener('scroll', function() {
-    if (!ticking) { ticking = true; requestAnimationFrame(update); }
-  });
-  update();
+  var ticking = false;
+  var lastTime = performance.now();
 
-  // Glitch flash — random brief brightness spikes
-  setInterval(function() {
-    var p = (document.documentElement.scrollHeight - window.innerHeight);
-    var progress = p > 0 ? window.scrollY / p : 0;
-    if (progress < 0.15 || Math.random() > 0.35) return;
-    var target = Math.random() < 0.5 ? f1 : f2;
-    var base = parseFloat(target.style.opacity) || 0;
-    if (base < 0.005) return;
-    var peak = Math.min(0.35, base * (3 + Math.random() * 3));
-    target.style.opacity = peak;
-    target.style.transition = 'opacity 0.06s';
-    setTimeout(function() {
-      target.style.opacity = 0;
-      target.style.transition = 'opacity 0.04s';
-    }, 60 + Math.random() * 40);
-    setTimeout(function() {
-      target.style.opacity = Math.min(0.25, base * 2);
-      target.style.transition = 'opacity 0.08s';
-    }, 130);
-    setTimeout(function() {
-      target.style.transition = '';
-      update();
-    }, 300);
-  }, 3000 + Math.random() * 2000);
+  function getProgress() {
+    var scrollH = document.documentElement.scrollHeight - window.innerHeight;
+    return scrollH > 0 ? window.scrollY / scrollH : 0;
+  }
+
+  function getColor(p) {
+    if (p < 0.15) return colors[0];
+    if (p < 0.30) return colors[1];
+    if (p < 0.45) return colors[2];
+    if (p < 0.60) return colors[3];
+    if (p < 0.80) return colors[4];
+    return colors[5];
+  }
+
+  function animate(now) {
+    var dt = Math.min((now - lastTime) / 1000, 0.1);
+    lastTime = now;
+    var p = getProgress();
+    var col = getColor(p);
+
+    for (var i = 0; i < glyphs.length; i++) {
+      var g = glyphs[i];
+
+      // Drift movement
+      g.x += g.vx * g.speed * dt * 60;
+      g.y += g.vy * g.speed * dt * 60;
+
+      // Subtle sine wobble
+      g.phase += dt * g.speed * 0.5;
+      var wobbleX = Math.sin(g.phase) * 0.3;
+      var wobbleY = Math.cos(g.phase * 0.7) * 0.2;
+
+      // Wrap around viewport
+      if (g.x < -8) g.x = 104;
+      if (g.x > 104) g.x = -8;
+      if (g.y < -8) g.y = 104;
+      if (g.y > 104) g.y = -8;
+
+      g.el.style.left = (g.x + wobbleX) + '%';
+      g.el.style.top = (g.y + wobbleY) + '%';
+
+      // Scroll-based opacity: invisible at top, increasingly visible
+      var baseOpacity = 0;
+      if (p > 0.08) {
+        baseOpacity = Math.min(0.14, (p - 0.08) * 0.18);
+      }
+      // Pulsing breath per glyph
+      var breath = 0.5 + 0.5 * Math.sin(g.phase * 1.3);
+      g.el.style.opacity = baseOpacity * (0.3 + breath * 0.7);
+      g.el.style.color = col;
+
+      // Scale pulse
+      var scale = g.baseScale + Math.sin(g.phase * 0.8) * 0.05;
+      g.el.style.transform = 'scale(' + scale + ')';
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+
+  // Glitch effects — periodic symbol swaps, flashes, brief disappearances
+  function triggerGlitch() {
+    var p = getProgress();
+    if (p < 0.12) {
+      setTimeout(triggerGlitch, 4000 + Math.random() * 3000);
+      return;
+    }
+
+    // Pick 1-4 random glyphs to affect
+    var count = 1 + Math.floor(Math.random() * Math.min(4, Math.floor(p * 6)));
+    for (var i = 0; i < count; i++) {
+      var g = glyphs[Math.floor(Math.random() * glyphs.length)];
+      var effect = Math.random();
+
+      if (effect < 0.4) {
+        // Flash bright then fade
+        var orig = g.el.style.opacity;
+        g.el.style.opacity = Math.min(0.45, parseFloat(orig) * 4 + 0.1);
+        g.el.style.transition = 'opacity 0.06s';
+        (function(el, o) {
+          setTimeout(function() { el.style.opacity = 0; el.style.transition = 'opacity 0.05s'; }, 70);
+          setTimeout(function() { el.style.opacity = o; el.style.transition = ''; }, 200);
+        })(g.el, orig);
+      } else if (effect < 0.7) {
+        // Swap to different sigil
+        var newIdx = Math.floor(Math.random() * sigils.length);
+        var oldText = g.el.textContent;
+        g.el.textContent = sigils[newIdx];
+        g.sigilIdx = newIdx;
+        // Sometimes swap back
+        if (Math.random() < 0.3) {
+          (function(el, t) {
+            setTimeout(function() { el.textContent = t; }, 300 + Math.random() * 500);
+          })(g.el, oldText);
+        }
+      } else {
+        // Brief vanish and reappear at slightly different position
+        g.el.style.opacity = '0';
+        (function(glyph) {
+          setTimeout(function() {
+            glyph.x += (Math.random() - 0.5) * 6;
+            glyph.y += (Math.random() - 0.5) * 4;
+          }, 150 + Math.random() * 200);
+        })(g);
+      }
+    }
+
+    // Schedule next glitch — more frequent as scroll progresses
+    var interval = Math.max(800, 4000 - p * 3500) + Math.random() * 2000;
+    setTimeout(triggerGlitch, interval);
+  }
+
+  setTimeout(triggerGlitch, 2000 + Math.random() * 3000);
 })();
 </script>
 
