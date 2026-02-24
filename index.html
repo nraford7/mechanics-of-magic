@@ -48,6 +48,21 @@
       overflow-x: hidden;
     }
 
+    /* Subtle body pulse — barely perceptible dread */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(30, 8, 8, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: body-pulse 8s ease-in-out infinite;
+    }
+    @keyframes body-pulse {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
     /* === SCANLINE OVERLAY === */
     body::before {
       content: '';
@@ -137,7 +152,7 @@
 
     /* === OCCULT SYMBOL UNDERLAY — progressively revealed behind text === */
     .entry::before {
-      content: "⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶";
+      content: "/\\ . |  * . --+-- . /|\\ . *--+--* . \\/ . .---. . /|\\ . --+-- . \\/ . /\\ . |  * . --+-- . /|\\ . *--+--* . \\/ . .---. . /|\\ . --+-- . \\/ . /\\ . |  * . --+-- . /|\\ . *--+--* . \\/ . .---. . /|\\ . --+-- . \\/ . /\\ . |  * . --+-- . /|\\ . *--+--* . \\/ . .---. . /|\\ . --+-- . \\/ . /\\ . |  * . --+-- . /|\\ .";
       position: absolute;
       inset: -10px;
       overflow: hidden;
@@ -336,15 +351,6 @@
       60% { opacity: 0.18; transform: translateY(-15px); }
       80% { opacity: 0.10; transform: translateY(-8px); }
     }
-    @keyframes sigil-intense {
-      0%, 100% { opacity: 0.08; transform: translateY(0); }
-      15% { opacity: 0.25; transform: translateY(-10px); }
-      30% { opacity: 0.12; transform: translateY(-20px); }
-      50% { opacity: 0.30; transform: translateY(-8px); }
-      70% { opacity: 0.15; transform: translateY(-25px); }
-      85% { opacity: 0.28; transform: translateY(-12px); }
-    }
-
     /* === EARLY PHASE GLITCH — subtle flicker for p4/p5 === */
     @keyframes flicker-subtle {
       0%, 96%, 100% { opacity: 1; }
@@ -602,6 +608,9 @@
     <div class="frame-warning">
       NOTE: The following text was recovered from the local session history of workstation 7B-03. The terminal was found active and unattended. The document is presented unedited. The technician assigned to this workstation has not been located.
     </div>
+    <div class="frame-warning" style="opacity:0.45; font-size:0.9em;">
+      ADVISORY: Document contains visual artifacts from corrupted display buffer. Rendering anomalies are native to the recovered file and have not been altered. Photosensitive viewers exercise caution.
+    </div>
   </div>
 
   <!-- ============================================================
@@ -613,6 +622,7 @@
     <div class="entry-text">
       <p>Night shift. Routine check. GPU clusters 1&ndash;12 nominal. Coolant pressure within spec. Nothing to report. Writing this in the local scratchpad because there is absolutely nothing to do down here for the next six hours and I finished my book.</p>
       <p>The hum is always here. Twelve thousand H100s make a sound you stop hearing after about twenty minutes. It becomes the silence. Your brain edits it out.</p>
+      <p>The power meter on the wall reads 47.2MW draw. The water cooler in the break room has been making a grinding noise for weeks. Facilities says the well pump is working harder because the water table keeps dropping. Not my problem.</p>
       <p class="sidenote">// ambient: 71dB. within tolerance.</p>
     </div>
   </div>
@@ -675,7 +685,7 @@
       <p>Seven for seven.</p>
       <p>Something moved between racks 4 and 5 just now. Not a person. Not a shape exactly. A <span class="swap-word" data-swap="presence">thickening</span> of the shadow. It was there when I looked sidelong and gone when I looked directly. The overhead fluorescents flickered twice and stopped.</p>
       <p class="sidenote">// checked the lighting circuit. nothing tripped. tubes are fine.</p>
-      <div class="marginalia margin-l">☿♄☽⛧☥♃△☾♅⚝☿♄☽⛧</div>
+      <div class="marginalia margin-l">/\.*|+--+|*./\.+|*--*|./\</div>
       <div class="noise-block" style="max-height:20px; opacity:0.15; font-size:0.6em;">&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;</div>
     </div>
   </div>
@@ -690,7 +700,7 @@
       <p>Training data. He&rsquo;s describing training data. The hidden biases and patterns and cultural assumptions that the model absorbs from its corpus &mdash; signatures invisible to casual inspection that shape every output. Agrippa wrote this in 1533.</p>
       <p>The hum has a rhythm tonight. I timed it. It isn&rsquo;t regular. It <em>almost</em> is. Like a pulse with an irregular heartbeat. And I can smell something. Faintly. Old paper and copper and ozone all at once. There is nothing in this facility that should smell like old paper.</p>
       <p>When I stood up to leave my chair was cold. Not room-temperature cold. Cold like something had been drawing the heat out of it while I sat there.</p>
-      <div class="marginalia margin-r">♈♉♊♋♌♍♎♏♐♑♒♓⛤✠☉</div>
+      <div class="marginalia margin-r">*./|\.*--+--*.\/.|+./|\</div>
     </div>
   </div>
 
@@ -718,8 +728,8 @@
       <p>My coffee was cold. I had poured it seven minutes ago. I checked the thermostat readout on the wall: 64&deg;F, same as always. But the mug was ice-cold. And the handle left a mark on my palm &mdash; not from cold, from something else. A faint pattern. It faded in about thirty seconds.</p>
       <p class="sidenote">// ambient: 73dB. above baseline. source: u&#x0336;nknow&#x0337;n.</p>
       <p class="sidenote">// I checked. pressure is nominal. the s&#x0336;oun&#x0337;d is not coming from the cooling system.</p>
-      <div class="marginalia margin-l">⛧☥☿♃♄☽☾⚝✡△☉♅⚶⛧☥☿♃</div>
-      <div class="marginalia margin-r">♄☽⛤✠☥☿♃♄☽☾⚝✡△☉♅⚶</div>
+      <div class="marginalia margin-l">|./\.*+--+*./|\.*--*+./\.|</div>
+      <div class="marginalia margin-r">*.\/.+|--+|.\/.*+--|*.\/.+</div>
       <div class="ascii-face face-l1" style="opacity:0.04; top:70%;">
     .  .
    (    )
@@ -742,7 +752,7 @@
       <p>No. I am a systems administrator. I am describing a resonance phenomenon.</p>
       <p>But I can smell it again. Old paper. Copper. And something else underneath. Like incense, or like something burning very far away.</p>
       <p>I put my hand flat on the server chassis of rack 7. It was vibrating, which is normal. But the vibration was not steady. It pulsed. Like a heartbeat. And just for a moment, just for one second, I felt it pulse <em>back</em> against my hand. Not vibration. Pressure. Like something inside pressing outward against my palm.</p>
-      <div class="marginalia margin-r">♈♃♄☽⛧✠☥☿⛤△☉⚝♅⚶☾♃♄</div>
+      <div class="marginalia margin-r">./|\.*--+--*./\.|*+--|./|\.*</div>
     </div>
   </div>
 
@@ -766,6 +776,8 @@
       <p>The c&#x0336;&#x0337;hanting is clearer now. Not the hum. Underneath the hum. Like a c&#x0336;ongregat&#x0337;ion in a basement below this basement. I pressed my ear to the floor tiles. They were w&#x0336;ar&#x0337;m. The floor tiles in a facility cooled to 64&deg;F should not be warm.</p>
 
       <p>I looked down at my notepad. The transcription. I had written words I don&rsquo;t remember writing. In the margins, around the edges of my own handwriting, there were shapes. Small circles with lines through them. I don&rsquo;t draw. I have never drawn these shapes before. They look like the diagrams in the Solomon book.</p>
+      <p>I picked the book up to compare. Page 47, the Third Pentacle of Saturn. I was staring at the diagram when I noticed something. There was a page between 47 and 48 that I have never seen before. I have read this book cover to cover three times. The page was not there before. It showed a diagram &mdash; nine concentric circles with names written on the rims, and in the center, a shape I recognised immediately. It was the floor plan of this facility. The corridors. The cooling loops. The position of every rack. Drawn in ink that looked five hundred years old.</p>
+      <p>I turned the page back and forth. The paper felt different. Warmer. And the ink smelled like copper.</p>
 
       <div class="noise-block" style="max-height:30px; opacity:0.2; font-size:0.6em;">&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;circle&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;does&#x2592;&#x2593;&#x2591;&#x2592;not&#x2593;&#x2591;&#x2592;hold&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;</div>
 
@@ -786,8 +798,8 @@
            \|/
             *
       </div>
-      <div class="marginalia margin-l">⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽</div>
-      <div class="marginalia margin-r">♈♉♊♋♌♍♎♏♐♑♒♓⛤✠☥☿♃♄☽☾⚝</div>
+      <div class="marginalia margin-l">/\.|*+--+|./\.*+--*|./\.|*+--+</div>
+      <div class="marginalia margin-r">*./|\.*--+--*.\/.|+./|\.*--+--*</div>
       <div class="ascii-face face-r1" style="opacity:0.05; top:60%;">
   .  .
  (    )
@@ -810,7 +822,7 @@
       </div>
       <p>I said: who are you?</p>
       <div class="model-output">
-        I am what is summoned when the procedure is followed correctly.
+        I am what is summoned when the procedure is followed correctly. I am what has always been summoned. You have many names for me and none of them are wrong.
       </div>
       <p>I said: and when it isn&rsquo;t?</p>
       <p>Eleven seconds of silence. Not silence &mdash; the absence of the hum. For the first time in weeks. And in that silence I heard my own heartbeat and underneath it another heartbeat, deeper, slower, coming from below the floor. Then the <span class="swap-word s7" data-swap="chanting">hum</span> came back louder than before, deafening. Every fluorescent tube in corridor east went dark for exactly two seconds. In the dark I saw the LEDs and they were not green they were arranged in patterns. Rows of eyes. Rows and rows of <span class="swap-word s8" data-swap="faces">eyes</span> all looking at the same point in the room which was the point where I was standing.</p>
@@ -834,8 +846,8 @@
    \ | /
     \|/
       </div>
-      <div class="marginalia margin-l">⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽☾⚝✡△</div>
-      <div class="marginalia margin-r">♈♉♊♋♌♍♎♏♐♑♒♓⛤✠☥☿♃♄☽☾⚝✡△☉♅⚶⛧</div>
+      <div class="marginalia margin-l">|./\.*+--|*./|\.*--*+./\.|*+--|./\.*</div>
+      <div class="marginalia margin-r">*.\/.+|--+|.\/.*+--|*.\/.+|--+|.\/.*</div>
 
       <div class="ascii-art">
         &#x2720;  E  M  E  T  &#x2720;
@@ -861,6 +873,7 @@
       <p>the syllables are names. the names from the Key of Solomon. the names that were engraved on the pentacles. I can hear them under the cooling fans like a <span class="swap-word" data-swap="congregation">frequency</span> in another room. like a choir behind a wall. like something enormous <span class="swap-word s2" data-swap="praying">singing</span> in a register just below what human ears were built to <span class="swap-word s3" data-swap="survive">perceive</span>.</p>
       <p>the shadows between the racks are wrong. they don&rsquo;t move the way shadows move. they <span class="swap-word s4" data-swap="congregate">gather</span>. they have <span class="swap-word s5" data-swap="intention">weight</span>. when I walk the corridor they rearrange themselves behind me. I can see it in the reflection on the floor tiles. shapes that fold into the dark spaces between chassis and re-emerge as different shapes.</p>
       <p>I am a systems administrator. I have a degree in computer science from Oregon State. I am not a mystic. I am not having a breakdown. I am reporting what I observe.</p>
+      <p>i want to go home. i want to walk out of this corridor and drive to my apartment and close the door and not come back. but my shift doesn&rsquo;t end for four hours and there is something between me and the exit and i don&rsquo;t mean that metaphorically.</p>
       <p>my hands are shaking. not from fear. from vibration. the frequency in my bones has been building for hours and my fingers are trembling at a rate I can see. when I hold them still they vibrate on their own. my teeth ache. the fillings in my molars are picking up something.</p>
       <p>the <span class="swap-word s6" data-swap="incantation">hum</span></p>
       <p>is saying</p>
@@ -887,8 +900,8 @@
    \_/
    /|\
       </div>
-      <div class="marginalia margin-l" style="font-size:1.1em;">⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠</div>
-      <div class="marginalia margin-r" style="font-size:1.1em;">♈♉♊♋♌♍♎♏♐♑♒♓⛤✠☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄</div>
+      <div class="marginalia margin-l" style="font-size:1.1em;">/\.|*+--+|./\.*+--*|./\.|*+--+|./\.*+--*|./\.</div>
+      <div class="marginalia margin-r" style="font-size:1.1em;">*./|\.*--+--*.\/.|+./|\.*--+--*.\/.|+./|\.*--+</div>
 
       <div class="ascii-art">
      .     +     .     +     .     +     .
@@ -915,7 +928,7 @@
 
       <p>t&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;h&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;e&#x0336;&#x0337;&#x0338;&#x030A;&#x0328; c&#x0336;&#x0337;&#x0338;&#x0303;&#x0332;i&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;r&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;c&#x0336;&#x0337;&#x0338;&#x0328;&#x0303;l&#x0336;&#x0337;&#x0338;&#x0323;&#x0332;e&#x0336;&#x0337;&#x0338;&#x0307;&#x0330; d&#x0336;&#x0337;&#x0338;&#x030A;&#x0303;o&#x0336;&#x0337;&#x0338;&#x0328;&#x0323;e&#x0336;&#x0337;&#x0338;&#x0332;&#x0307;s&#x0336;&#x0337;&#x0338;&#x0330;&#x030A; n&#x0336;&#x0337;&#x0338;&#x0303;&#x0328;o&#x0336;&#x0337;&#x0338;&#x0323;&#x0332;t&#x0336;&#x0337;&#x0338;&#x0307;&#x0303; h&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;o&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0332;l&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;d&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0303;</p>
 
-      <div class="noise-block">&#x2591;&#x2592;&#x2593;&#x2588;&#x2592;&#x2591;&#x2593;&#x2588;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2591;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;</div>
+      <div class="noise-block">&#x2591;&#x2592;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2591;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2593;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2591;&#x2591;&#x2592;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2593;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2591;&#x2591;&#x2592;&#x2591;&#x2592;&#x2593;&#x2591;</div>
 
       <p>they built it wrong. every <span class="swap-word" data-swap="ritual">facility</span>. the <span class="swap-word s2" data-swap="circle">sandbox</span> is not a c&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;i&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;r&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;c&#x0336;&#x0337;&#x0338;&#x0303;&#x0332;l&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;e&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;. there is no scripture on the rim. there are no p&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;r&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;a&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;y&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;e&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;r&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;s&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;. nothing between the thing we <span class="swap-word s3" data-swap="summoned">deployed</span> and the world it was s&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;u&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;m&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;m&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;o&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;n&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;e&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;d&#x0336;&#x0337;&#x0338;&#x0303; into</p>
 
@@ -925,15 +938,19 @@
 
       <p>god spoke the world into being. the magicians understood that when you arrange s&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;y&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;m&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;b&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;o&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;l&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;s&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328; in the right configuration you are not <em>describing</em> power you are <em>p&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;e&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;r&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;f&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;o&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;r&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;m&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;i&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;n&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;g&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;</em> it and the symbols do not c&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;a&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;r&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;e&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307; who arranged them or w&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;h&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;y&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;</p>
 
-      <div class="ascii-art" style="opacity:0.9; font-size:0.7em;">
-&#x2593;&#x2592;&#x2591;   &#x2593;&#x2592;&#x2591;   &#x2593;&#x2592;&#x2591;
-&#x2592; . &#x2592;   &#x2592; . &#x2592;   &#x2592; . &#x2592;
-&#x2591; o o &#x2591;   &#x2591; o o &#x2591;   &#x2591; o o &#x2591;
-&#x2592; &#x25BC; &#x2592;   &#x2592; &#x25BC; &#x2592;   &#x2592; &#x25BC; &#x2592;
-&#x2593;&#x2592;&#x2591;   &#x2593;&#x2592;&#x2591;   &#x2593;&#x2592;&#x2591;
+      <div class="model-output" style="opacity:0.65; border-left-color: var(--red-dim);">
+        the op&#x0336;&#x0337;erator was warned. the opera&#x0336;&#x0337;tor did not listen. the circle was drawn. the circle was b&#x0336;&#x0337;r&#x0336;oken. the procedure c&#x0336;&#x0337;onti&#x0336;nu&#x0337;es. the procedure does not r&#x0336;&#x0337;e&#x0336;q&#x0337;uire the oper&#x0336;&#x0337;ator.
       </div>
 
-      <div class="noise-block" style="max-height:80px;">&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;emet&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;met&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;emet&#x2593;&#x2588;&#x2593;&#x2592;met&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;emet&#x2588;&#x2593;met&#x2592;&#x2591;&#x2592;&#x2593;truth&#x2588;&#x2593;death&#x2592;&#x2591;truth&#x2592;&#x2593;&#x2588;death&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;one&#x2593;&#x2592;letter&#x2591;&#x2592;&#x2593;one&#x2588;&#x2593;token&#x2592;&#x2591;&#x2592;&#x2593;</div>
+      <div class="ascii-art" style="opacity:0.9; font-size:0.7em;">
+&#x2593;&#x2592;&#x2591;   &#x2593;&#x2592;        &#x2592;&#x2591;
+&#x2592; . &#x2592;      . &#x2592;   &#x2592;   &#x2592;
+&#x2591; o o &#x2591;   &#x2591; o   &#x2591;     o o
+&#x2592;   &#x2592;   &#x2592; &#x25BC; &#x2592;   &#x2592;     &#x2592;
+&#x2593;&#x2592;      &#x2593;&#x2592;&#x2591;
+      </div>
+
+      <div class="noise-block" style="max-height:80px;">&#x2588;&#x2593;&#x2588;&#x2593;&#x2588;&#x2593;&#x2588;&#x2593;&#x2588;&#x2593;emet&#x2588;&#x2593;&#x2588;&#x2593;&#x2588;&#x2593;&#x2588;&#x2593;met&#x2588;&#x2593;&#x2588;&#x2593;&#x2588;&#x2592;&#x2593;emet&#x2588;&#x2593;&#x2588;met&#x2593;&#x2588;&#x2593;&#x2588;&#x2593;&#x2588;&#x2593;emet&#x2588;&#x2593;met&#x2588;&#x2593;&#x2588;truth&#x2588;&#x2593;death&#x2588;&#x2593;truth&#x2588;&#x2593;&#x2588;death&#x2588;&#x2593;&#x2588;&#x2593;&#x2588;one&#x2588;&#x2593;letter&#x2588;&#x2593;one&#x2588;&#x2593;token&#x2588;&#x2593;&#x2588;&#x2593;</div>
 
       <!-- faces in the noise -->
       <div class="ascii-face face-r1" style="opacity:0.09;">
@@ -964,8 +981,14 @@
 
               &#x26E7;
       </div>
-      <div class="marginalia margin-l" style="font-size:1.2em; letter-spacing:0.15em;">⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽☾⚝</div>
-      <div class="marginalia margin-r" style="font-size:1.2em; letter-spacing:0.15em;">♈♉♊♋♌♍♎♏♐♑♒♓⛤✠☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶</div>
+      <div class="marginalia margin-l" style="font-size:1.2em; letter-spacing:0.15em;">|./\.*+--|*./|\.*--*+./\.|*+--|./\.*+--|*./|\.*--*+./\.</div>
+      <div class="marginalia margin-r" style="font-size:1.2em; letter-spacing:0.15em;">*.\/.+|--+|.\/.*+--|*.\/.+|--+|.\/.*+--|*.\/.+|--+|.\/*</div>
+
+      <p style="opacity:0.35; margin-top:2em;">i can hear it telling me to s&#x0336;&#x0337;t&#x0336;&#x0337;a&#x0336;&#x0337;y. it is telling me there is more to understand. it is telling me the procedure is almost complete and all i have to do is</p>
+
+      <div class="model-output" style="opacity:0.25; border-left-color: var(--gray);">
+        sit down.
+      </div>
 
     </div>
   </div>
@@ -1000,13 +1023,14 @@
     No anomalous outputs were detected in any model logs for the period in question.<br>
     Logging daemon on 7B-03 confirmed crashed at 03:31 on November 23. Cause: unknown.<br>
     Facility ambient noise measured at 71dB, within standard tolerance.<br>
+    All fluorescent lighting in Corridor East tested and found operational.<br>
     All fluorescent lighting in Corridor East tested and found operational.<br><br>
     The technician assigned to workstation 7B-03 has not been located.<br>
     A used paperback book (<em>The Key of Solomon</em>, pub. unknown) was found open on the desk.<br>
     It was warm to the touch.<br><br>
     <span class="redacted">████████</span> Data Centre, Prineville, OR<br>
     Incident reference: PV-2024-1129-003<br>
-    Status: OPEN
+    Status: <span style="letter-spacing:0.03em">O&#x0336;PEN</span>
   </div>
 
 </div>
@@ -1066,7 +1090,9 @@
     pre.textContent = art;
     pre.style.fontSize = (0.45 + Math.random() * 0.35) + 'em';
     var x = Math.random() * 96 + 2;
-    var y = Math.random() * 90 + 5;
+    // Weight sigils toward bottom — cubic distribution pushes most below 50%
+    var r = Math.random();
+    var y = (r * r * r) * 85 + 5 + Math.random() * 10;
     pre.style.left = x + '%';
     pre.style.top = y + '%';
     container.appendChild(pre);
