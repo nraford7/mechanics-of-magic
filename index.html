@@ -68,6 +68,52 @@
       max-width: 760px;
       margin: 0 auto;
       padding: 40px 30px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* === FULL-SCREEN ARCANE SYMBOL BACKGROUND === */
+    .sigil-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .sigil-field {
+      position: absolute;
+      inset: -80px;
+      font-family: 'IBM Plex Mono', monospace;
+      word-break: break-all;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+    }
+    .sigil-field-1 {
+      font-size: 1.05em;
+      line-height: 2.6;
+      letter-spacing: 0.5em;
+      color: var(--green-faint);
+      animation: sigil-drift-a 60s infinite ease-in-out alternate;
+    }
+    .sigil-field-2 {
+      font-size: 1.5em;
+      line-height: 3.4;
+      letter-spacing: 0.8em;
+      color: var(--red-dim);
+      animation: sigil-drift-b 80s infinite ease-in-out alternate;
+    }
+    @keyframes sigil-drift-a {
+      0% { transform: translate(0, 0); }
+      33% { transform: translate(-18px, -30px); }
+      66% { transform: translate(12px, -15px); }
+      100% { transform: translate(-8px, -40px); }
+    }
+    @keyframes sigil-drift-b {
+      0% { transform: translate(0, 0); }
+      33% { transform: translate(20px, 18px); }
+      66% { transform: translate(-12px, 30px); }
+      100% { transform: translate(15px, 10px); }
     }
 
     /* === FRAME === */
@@ -576,6 +622,12 @@
 </head>
 <body>
 
+<!-- Full-screen arcane symbol parallax background -->
+<div class="sigil-bg" id="sigil-bg">
+  <div class="sigil-field sigil-field-1" id="sigil-f1"></div>
+  <div class="sigil-field sigil-field-2" id="sigil-f2"></div>
+</div>
+
 <div class="terminal">
 
   <!-- ============ FRAME HEADER ============ -->
@@ -1005,6 +1057,68 @@
   </div>
 
 </div>
+
+<script>
+(function() {
+  // Generate arcane symbol fields
+  var s1 = '\u26E7\u263D\u25B3\u263F\u26E4\u2644\u25BD\u2625\u2720\u2643\u263E\u269D\u2609\u2645\u2721\u2648\u2649\u264A\u264B\u264C\u264D\u264E\u264F\u2650\u2651\u2652\u2653\u2295\u2297\u25EF\u221E\u2727\u2726\u2626\u271D\u2695';
+  var s2 = '\u26E7\u26E4\u2720\u2625\u2295\u2297\u263F\u2643\u2644\u2645\u263D\u263E\u2609\u2721\u269D\u25B3\u25BD\u25EF\u221E\u2727';
+  document.getElementById('sigil-f1').textContent = s1.repeat(80);
+  document.getElementById('sigil-f2').textContent = s2.repeat(60);
+
+  var f1 = document.getElementById('sigil-f1');
+  var f2 = document.getElementById('sigil-f2');
+  var ticking = false;
+
+  function update() {
+    var scrollH = document.documentElement.scrollHeight - window.innerHeight;
+    var p = scrollH > 0 ? window.scrollY / scrollH : 0;
+    // Layer 1: fades in from 10% scroll, peaks at 0.07
+    var o1 = Math.max(0, Math.min(0.07, (p - 0.08) * 0.1));
+    // Layer 2: fades in from 30% scroll, peaks at 0.14, color shifts red
+    var o2 = Math.max(0, Math.min(0.14, (p - 0.25) * 0.28));
+    f1.style.opacity = o1;
+    f2.style.opacity = o2;
+    // Shift layer 2 color from red-dim to bright red to white at end
+    if (p > 0.7) {
+      f2.style.color = p > 0.85 ? '#e0e0e0' : '#cc3333';
+    } else {
+      f2.style.color = '';
+    }
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  });
+  update();
+
+  // Glitch flash — random brief brightness spikes
+  setInterval(function() {
+    var p = (document.documentElement.scrollHeight - window.innerHeight);
+    var progress = p > 0 ? window.scrollY / p : 0;
+    if (progress < 0.15 || Math.random() > 0.35) return;
+    var target = Math.random() < 0.5 ? f1 : f2;
+    var base = parseFloat(target.style.opacity) || 0;
+    if (base < 0.005) return;
+    var peak = Math.min(0.35, base * (3 + Math.random() * 3));
+    target.style.opacity = peak;
+    target.style.transition = 'opacity 0.06s';
+    setTimeout(function() {
+      target.style.opacity = 0;
+      target.style.transition = 'opacity 0.04s';
+    }, 60 + Math.random() * 40);
+    setTimeout(function() {
+      target.style.opacity = Math.min(0.25, base * 2);
+      target.style.transition = 'opacity 0.08s';
+    }, 130);
+    setTimeout(function() {
+      target.style.transition = '';
+      update();
+    }, 300);
+  }, 3000 + Math.random() * 2000);
+})();
+</script>
 
 </body>
 </html>
