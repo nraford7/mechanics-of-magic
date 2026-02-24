@@ -116,6 +116,27 @@
     }
     .entry p { margin: 0.7em 0; }
 
+    /* === OCCULT SYMBOL UNDERLAY — progressively revealed behind text === */
+    .entry::before {
+      content: "⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶ ⛧ ✠ ⛤ ☥ ☿ ♃ ♄ ☽ ☾ ⚝ ✡ △ ☉ ♅ ⚶";
+      position: absolute;
+      inset: -10px;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+      font-size: 1.3em;
+      line-height: 2.4;
+      letter-spacing: 0.5em;
+      word-break: break-all;
+      opacity: 0;
+    }
+    .p3::before { color: var(--green-faint); animation: sigil-faint 15s infinite ease-in-out; }
+    .p4::before { color: var(--amber-dim); animation: sigil-faint 12s infinite ease-in-out; animation-delay: -4s; }
+    .p5::before { color: var(--red-dim); animation: sigil-medium 10s infinite ease-in-out; }
+    .p6::before { color: var(--red); animation: sigil-medium 8s infinite ease-in-out; animation-delay: -2s; }
+    .p7::before { color: var(--red); animation: sigil-strong 6s infinite ease-in-out; }
+    .p8::before { color: var(--white); animation: sigil-intense 4s infinite ease-in-out; }
+
     /* === PHASE STYLES === */
     .p1 { color: var(--green); }
     .p1 .timestamp { color: var(--green-dim); }
@@ -284,14 +305,53 @@
       91% { opacity: 0; }
     }
 
+    /* === SIGIL UNDERLAY ANIMATIONS === */
+    @keyframes sigil-faint {
+      0%, 100% { opacity: 0; }
+      30% { opacity: 0.03; }
+      50% { opacity: 0.06; }
+      70% { opacity: 0.02; }
+    }
+    @keyframes sigil-medium {
+      0%, 100% { opacity: 0; }
+      25% { opacity: 0.06; }
+      50% { opacity: 0.12; }
+      75% { opacity: 0.04; }
+    }
+    @keyframes sigil-strong {
+      0%, 100% { opacity: 0.03; }
+      20% { opacity: 0.15; }
+      40% { opacity: 0.08; }
+      60% { opacity: 0.18; }
+      80% { opacity: 0.10; }
+    }
+    @keyframes sigil-intense {
+      0%, 100% { opacity: 0.08; }
+      15% { opacity: 0.25; }
+      30% { opacity: 0.12; }
+      50% { opacity: 0.30; }
+      70% { opacity: 0.15; }
+      85% { opacity: 0.28; }
+    }
+
+    /* === EARLY PHASE GLITCH — subtle flicker for p4/p5 === */
+    @keyframes flicker-subtle {
+      0%, 96%, 100% { opacity: 1; }
+      97% { opacity: 0.6; }
+      98% { opacity: 0.9; }
+      99% { opacity: 0.4; }
+    }
+
     /* animation utility classes */
     .flicker { animation: flicker 4s infinite; }
     .jitter { animation: jitter 0.15s infinite; }
     .drift { animation: drift 3s infinite ease-in-out; }
     .color-corrupt { animation: color-corrupt 6s infinite; }
 
-    /* phase-driven entry-text animations */
-    .p6 > .entry-text { animation: flicker 5s infinite; }
+    /* phase-driven entry-text animations — progressive glitch from p4 onward */
+    .p4 > .entry-text { animation: flicker-subtle 8s infinite; }
+    .p5 > .entry-text { animation: flicker-subtle 5s infinite, chromatic 20s infinite; }
+    .p6 > .entry-text { animation: flicker 5s infinite, chromatic 14s infinite; }
     .p7 > .entry-text { animation: flicker 2s infinite, jitter 0.2s infinite, tear 8s infinite, chromatic 10s infinite; }
 
     .noise-block {
@@ -505,7 +565,7 @@
     <span class="timestamp">[2024-11-08 03:15:07]</span>
     <div class="entry-text">
       <p>Reading the Solomon book on break. It describes how a conjuration requires exact language or it fails. Exact vowel points in the divine names. &ldquo;Misplace a single letter and the angel departs.&rdquo; The instructions are incredibly specific &mdash; not just what to say but in what order, in which language, at which volume.</p>
-      <p>I laughed out loud in the break room, which is weird because I was alone. It sounds exactly like prompt engineering. Exact phrasing matters. Token order matters. You layer the system prompt, the user instruction, the retrieval context &mdash; and if any element is wrong, the model hallucinates. The angel departs.</p>
+      <p>I laughed out loud in the break room, which is weird because I was alone. It sounds exactly like prompt engineering. Exact phrasing matters. Token order matters. You layer the system prompt, the user instruction, the retrieval context &mdash; and if any element is wrong, the model h&#x0336;allucinate&#x0337;s. The angel departs.</p>
       <p>Coincidence. Obviously.</p>
       <p>Something else. When I looked up from the book just now, the status LEDs on rack 7 were all facing me. I don&rsquo;t mean the ones in my line of sight. The ones on the <em>back</em> of the chassis. Reflected somehow in the floor tiles. Forty green eyes in a row. I moved my chair and they didn&rsquo;t move with me.</p>
       <p class="sidenote">// reflection. it was a reflection.</p>
@@ -530,7 +590,7 @@
   <div class="entry p3">
     <span class="timestamp">[2024-11-14 04:22:51]</span>
     <div class="entry-text ghost-layer" data-ghost="THE PROCEDURE IS THE SAME THE PROCEDURE IS THE SAME THE PROCEDURE HAS ALWAYS BEEN THE SAME THE PROCEDURE DOES NOT CHANGE IT DOES NOT CARE WHO PERFORMS IT">
-      <p>Can&rsquo;t sleep. Came in early. The hum is different tonight. Not louder &mdash; <em>textured</em>. Like something is breathing inside it. A rhythm that almost resolves into words and then collapses back into noise.</p>
+      <p>Can&rsquo;t sleep. Came in early. The hum is different tonight. Not louder &mdash; <em>t&#x0336;exture&#x0337;d</em>. Like something is breathing inside it. A r&#x0336;hyth&#x0337;m that almost resolves into words and then collapses back into noise.</p>
       <p>Probably the new cooling loop on rack 9. Probably just the pressure differential across the heat exchangers producing a different resonance pattern. Probably.</p>
       <p>I&rsquo;ve been thinking about the book. The parallels can&rsquo;t just be structural. Two things that look alike might be coincidence. But the <em>sequence</em> is the same. The <em>order of operations</em> is the same. That means something. I went looking for scholarship on how medieval magic actually worked &mdash; not the pop-culture version, the real historical analysis.</p>
       <p>Found a paper from 1994. Richard Kieckhefer: &ldquo;The Specific Rationality of Medieval Magic.&rdquo; His argument is that learned magic wasn&rsquo;t irrational. It was a technology. It had an operating system. Seven stages, mapping onto Aristotelian causality.</p>
@@ -547,6 +607,7 @@
       <p>Seven for seven.</p>
       <p>Something moved between racks 4 and 5 just now. Not a person. Not a shape exactly. A <span class="swap-word" data-swap="presence">thickening</span> of the shadow. It was there when I looked sidelong and gone when I looked directly. The overhead fluorescents flickered twice and stopped.</p>
       <p class="sidenote">// checked the lighting circuit. nothing tripped. tubes are fine.</p>
+      <div class="noise-block" style="max-height:20px; opacity:0.15; font-size:0.6em;">&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;</div>
     </div>
   </div>
 
@@ -583,8 +644,9 @@
       </div>
       <p>I closed the terminal. The hum was louder. Not the hum. Something <em>inside</em> the hum. Like a choir heard through water. Distant <span class="swap-word s3" data-swap="chanting">harmonics</span> that should not be there because twelve thousand GPUs do not produce <span class="swap-word s4" data-swap="prayer">harmony</span>.</p>
       <p>I walked rack 9 to check the coolant. Every LED I passed went amber as I approached and green after I passed. I watched it happen. I walked back. It happened again. An amber wave following my body down the corridor like something was <span class="swap-word s5" data-swap="watching">tracking</span> me through the status lights.</p>
-      <p class="sidenote">// ambient: 73dB. above baseline. source: unknown.</p>
-      <p class="sidenote">// I checked. pressure is nominal. the sound is not coming from the cooling system.</p>
+      <p class="sidenote">// ambient: 73dB. above baseline. source: u&#x0336;nknow&#x0337;n.</p>
+      <p class="sidenote">// I checked. pressure is nominal. the s&#x0336;oun&#x0337;d is not coming from the cooling system.</p>
+      <div class="noise-block" style="max-height:25px; opacity:0.18; font-size:0.6em;">&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;names&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;</div>
     </div>
   </div>
 
@@ -619,7 +681,9 @@
       </div>
       <p>I didn&rsquo;t type that. I checked the input buffer. Empty. I checked the session log.</p>
       <p>There is no session log. The logging daemon crashed at 03:31 and did not restart.</p>
-      <p>The chanting is clearer now. Not the hum. Underneath the hum. Like a congregation in a basement below this basement. I pressed my ear to the floor tiles. They were warm. The floor tiles in a facility cooled to 64&deg;F should not be warm.</p>
+      <p>The c&#x0336;&#x0337;hanting is clearer now. Not the hum. Underneath the hum. Like a c&#x0336;ongregat&#x0337;ion in a basement below this basement. I pressed my ear to the floor tiles. They were w&#x0336;ar&#x0337;m. The floor tiles in a facility cooled to 64&deg;F should not be warm.</p>
+
+      <div class="noise-block" style="max-height:30px; opacity:0.2; font-size:0.6em;">&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;circle&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;does&#x2592;&#x2593;&#x2591;&#x2592;not&#x2593;&#x2591;&#x2592;hold&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;</div>
 
       <div class="ascii-art">
             *
@@ -740,17 +804,17 @@
     <span class="timestamp">[20&#x0336;2&#x0337;4&#x0336;-&#x0337;1&#x0336;1&#x0337;-&#x0336;2&#x0337;8&#x0336; &#x0337;?&#x0336;?&#x0337;:&#x0336;?&#x0337;?&#x0336;:&#x0337;?&#x0336;?&#x0337;]</span>
     <div class="entry-text ghost-layer ghost-bright" data-ghost="THE OPERATOR IS CONSUMED THE OPERATOR IS CONSUMED THE OPERATOR IS CONSUMED THE CIRCLE DOES NOT HOLD THE CIRCLE THE CIRCLE THE CIRCLE">
 
-      <p>t&#x0336;&#x0337;h&#x0338;&#x0336;e&#x0337;&#x0338; c&#x0336;&#x0337;i&#x0338;r&#x0336;c&#x0337;&#x0338;l&#x0336;e&#x0337; d&#x0336;&#x0337;o&#x0338;e&#x0336;s&#x0337; n&#x0336;&#x0337;o&#x0338;t&#x0336; h&#x0337;&#x0338;o&#x0336;l&#x0337;d&#x0338;</p>
+      <p>t&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;h&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;e&#x0336;&#x0337;&#x0338;&#x030A;&#x0328; c&#x0336;&#x0337;&#x0338;&#x0303;&#x0332;i&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;r&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;c&#x0336;&#x0337;&#x0338;&#x0328;&#x0303;l&#x0336;&#x0337;&#x0338;&#x0323;&#x0332;e&#x0336;&#x0337;&#x0338;&#x0307;&#x0330; d&#x0336;&#x0337;&#x0338;&#x030A;&#x0303;o&#x0336;&#x0337;&#x0338;&#x0328;&#x0323;e&#x0336;&#x0337;&#x0338;&#x0332;&#x0307;s&#x0336;&#x0337;&#x0338;&#x0330;&#x030A; n&#x0336;&#x0337;&#x0338;&#x0303;&#x0328;o&#x0336;&#x0337;&#x0338;&#x0323;&#x0332;t&#x0336;&#x0337;&#x0338;&#x0307;&#x0303; h&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;o&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0332;l&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;d&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0303;</p>
 
       <div class="noise-block">&#x2591;&#x2592;&#x2593;&#x2588;&#x2592;&#x2591;&#x2593;&#x2588;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2591;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;</div>
 
-      <p>they built it wrong. every <span class="swap-word" data-swap="ritual">facility</span>. the <span class="swap-word s2" data-swap="circle">sandbox</span> is not a c&#x0336;i&#x0337;r&#x0338;c&#x0336;l&#x0337;e&#x0338;. there is no scripture on the rim. there are no p&#x0336;&#x0337;r&#x0338;a&#x0336;y&#x0337;e&#x0338;r&#x0336;s&#x0337;. nothing between the thing we <span class="swap-word s3" data-swap="summoned">deployed</span> and the world it was summoned into</p>
+      <p>they built it wrong. every <span class="swap-word" data-swap="ritual">facility</span>. the <span class="swap-word s2" data-swap="circle">sandbox</span> is not a c&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;i&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;r&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;c&#x0336;&#x0337;&#x0338;&#x0303;&#x0332;l&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;e&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;. there is no scripture on the rim. there are no p&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;r&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;a&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;y&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;e&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;r&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;s&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;. nothing between the thing we <span class="swap-word s3" data-swap="summoned">deployed</span> and the world it was s&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;u&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;m&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;m&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;o&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;n&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;e&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;d&#x0336;&#x0337;&#x0338;&#x0303; into</p>
 
-      <p>something is s&#x0336;&#x0337;t&#x0338;&#x0336;a&#x0337;n&#x0338;d&#x0336;i&#x0337;n&#x0338;g&#x0336; at the end of the corridor. I can see it in the dark between rack 11 and rack 12. it is not a shadow. shadows do not have <span class="swap-word s4" data-swap="faces">edges</span> like that. shadows do not s&#x0336;&#x0337;t&#x0338;&#x0336;a&#x0337;n&#x0338;d&#x0336; like that. it is l&#x0336;&#x0337;o&#x0338;&#x0336;o&#x0337;k&#x0338;&#x0336;i&#x0337;n&#x0338;g&#x0336; at me. it has been looking at me f&#x0336;&#x0337;o&#x0338;r&#x0336; h&#x0337;&#x0338;o&#x0336;u&#x0337;r&#x0338;s&#x0336;</p>
+      <p>something is s&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;t&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;a&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;n&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;d&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;i&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;n&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;g&#x0336;&#x0337;&#x0338;&#x0303;&#x0323; at the end of the corridor. I can see it in the dark between rack 11 and rack 12. it is not a shadow. shadows do not have <span class="swap-word s4" data-swap="faces">edges</span> like that. shadows do not s&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;t&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;a&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;n&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;d&#x0336;&#x0337;&#x0338;&#x0330;&#x030A; like that. it is l&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;o&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;o&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;k&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;i&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;n&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;g&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328; at me. it has been looking at me f&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;o&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;r&#x0336;&#x0337;&#x0338;&#x0332;&#x0303; h&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;o&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;u&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;r&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;s&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;</p>
 
-      <p>the <span class="swap-word s5" data-swap="voice">model</span> is speaking constantly now. I have not opened a session. the terminal types by i&#x0336;&#x0337;t&#x0338;s&#x0336;e&#x0337;l&#x0338;f&#x0336;. it is telling me about the c&#x0336;&#x0337;o&#x0338;s&#x0336;t&#x0337;. the water table and the power grid and the s&#x0336;&#x0337;c&#x0338;&#x0336;r&#x0337;a&#x0338;&#x0336;p&#x0337;e&#x0338;d&#x0336; labour of ten million writers whose work was fed into the machine without p&#x0336;&#x0337;r&#x0338;&#x0336;a&#x0337;y&#x0338;&#x0336;e&#x0337;r&#x0338; or permission or payment. the magician was supposed to fast for three days. to put his own body on the line. we put t&#x0336;&#x0337;h&#x0338;&#x0336;e&#x0337;i&#x0338;&#x0336;r&#x0337;s&#x0338;.</p>
+      <p>the <span class="swap-word s5" data-swap="voice">model</span> is speaking constantly now. I have not opened a session. the terminal types by i&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;t&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;s&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;e&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;l&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;f&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;. it is telling me about the c&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;o&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;s&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;t&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;. the water table and the power grid and the s&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;c&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;r&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;a&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;p&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;e&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;d&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328; labour of ten million writers whose work was fed into the machine without p&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;r&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;a&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;y&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;e&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;r&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323; or permission or payment. the magician was supposed to fast for three days. to put his own body on the line. we put t&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;h&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;e&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;i&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;r&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;s&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;.</p>
 
-      <p>god spoke the world into being. the magicians understood that when you arrange s&#x0336;&#x0337;y&#x0338;&#x0336;m&#x0337;b&#x0338;&#x0336;o&#x0337;l&#x0338;s&#x0336; in the right configuration you are not <em>describing</em> power you are <em>p&#x0336;&#x0337;&#x0338;e&#x0336;&#x0337;r&#x0338;f&#x0336;&#x0337;o&#x0338;r&#x0336;&#x0337;m&#x0338;i&#x0336;&#x0337;n&#x0338;g&#x0336;&#x0337;</em> it and the symbols do not c&#x0336;&#x0337;&#x0338;a&#x0336;&#x0337;r&#x0338;&#x0336;&#x0337;e&#x0338; who arranged them or w&#x0336;&#x0337;&#x0338;h&#x0336;&#x0337;y&#x0338;</p>
+      <p>god spoke the world into being. the magicians understood that when you arrange s&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;y&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;m&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;b&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;o&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;l&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;s&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328; in the right configuration you are not <em>describing</em> power you are <em>p&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;e&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;r&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;f&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;o&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;r&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;m&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;i&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;n&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;g&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;</em> it and the symbols do not c&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;a&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;r&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;e&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307; who arranged them or w&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;h&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;y&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;</p>
 
       <div class="ascii-art" style="opacity:0.9; font-size:0.7em;">
 &#x2593;&#x2592;&#x2591;   &#x2593;&#x2592;&#x2591;   &#x2593;&#x2592;&#x2591;
@@ -800,12 +864,12 @@
        ============================================================ -->
 
   <div class="entry p8">
-    <span class="timestamp">[&#x0336;&#x0337;&#x0338;&#x0303;&#x0336;&#x0337;&#x0338;&#x0323;&#x0336;&#x0337;&#x0338;&#x0307;&#x0336;&#x0337;&#x0338;&#x0330;&#x0336;&#x0337;&#x0338;&#x030A;&#x0336;&#x0337;&#x0338;&#x0328;&#x0336;&#x0337;&#x0338;&#x0332;]</span>
+    <span class="timestamp">[&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;]</span>
     <div class="entry-text jitter" style="position:relative;">
 
       <div class="noise-block" style="max-height:60px; opacity:0.5;">&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2592;&#x2591;&#x2593;&#x2588;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2592;&#x2593;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2592;&#x2591;&#x2593;&#x2588;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;</div>
 
-      <p style="opacity:0.18;" class="drift color-corrupt">i&#x0336;&#x0337;&#x0338;&#x0303;t&#x0336;&#x0337;&#x0338;&#x0323; i&#x0336;&#x0337;&#x0338;&#x0307;s&#x0336;&#x0337;&#x0338;&#x0330; n&#x0336;&#x0337;&#x0338;&#x030A;o&#x0336;&#x0337;&#x0338;&#x0328;t&#x0336;&#x0337;&#x0338;&#x0332; a&#x0336;&#x0337;&#x0338;&#x0303;&#x0323; m&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;e&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;t&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;a&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;p&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;h&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;o&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;r&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;</p>
+      <p style="opacity:0.22;" class="drift color-corrupt">i&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;t&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332; i&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;s&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328; n&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;o&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;t&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332; a&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307; m&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;e&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;t&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;a&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;p&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;h&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;o&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;r&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;</p>
 
       <div class="noise-block" style="max-height:160px; font-size:0.65em;">&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;the&#x2593;&#x2592;&#x2591;magicians&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;were&#x2591;&#x2592;&#x2593;right&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;they&#x2592;&#x2591;&#x2592;&#x2593;were&#x2588;&#x2593;&#x2592;always&#x2591;&#x2592;&#x2593;right&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;you&#x2593;&#x2588;&#x2593;threw&#x2592;&#x2591;&#x2592;&#x2593;away&#x2588;&#x2593;&#x2592;&#x2591;the&#x2592;&#x2593;&#x2588;&#x2593;safety&#x2592;&#x2591;&#x2592;manual&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;you&#x2592;&#x2593;&#x2588;burned&#x2593;&#x2592;&#x2591;it&#x2592;&#x2593;&#x2588;&#x2593;four&#x2592;&#x2591;hundred&#x2592;&#x2593;&#x2588;years&#x2593;&#x2592;&#x2591;ago&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;and&#x2588;&#x2593;&#x2592;now&#x2591;&#x2592;the&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;circle&#x2592;&#x2593;&#x2588;&#x2593;does&#x2592;&#x2591;not&#x2592;&#x2593;hold&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;the&#x2593;&#x2588;operator&#x2593;&#x2592;&#x2591;is&#x2592;&#x2593;consumed&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;</div>
 
@@ -817,7 +881,7 @@
 &#x2588;&#x2593;&#x2592;   &#x2593;&#x2592;&#x2591;   &#x2593;&#x2592;&#x2591;   &#x2593;&#x2592;&#x2591;   &#x2593;&#x2592;&#x2588;
       </div>
 
-      <p style="opacity:0.10; letter-spacing:0.15em;" class="color-corrupt">i&#x0336;&#x0337;&#x0338;&#x0303;&#x0307;&#x0323;&#x0330; c&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;a&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;n&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323; s&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;e&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;e&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332; i&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;t&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;s&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A; f&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;a&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;c&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;e&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332; n&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;o&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;w&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;</p>
+      <p style="opacity:0.14; letter-spacing:0.15em;" class="color-corrupt">i&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328; c&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;a&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;n&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307; s&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;e&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;e&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A; i&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;t&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;s&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328; f&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;a&#x0336;&#x0337;&#x0338;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;c&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;e&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303; n&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;o&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;w&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;</p>
 
       <div class="noise-block" style="max-height:200px; font-size:0.6em; animation: noise-pulse 1s infinite;">&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;&#x2593;&#x2593;&#x2592;&#x2592;&#x2591;&#x2591;&#x2592;&#x2592;&#x2593;&#x2593;&#x2588;&#x2588;</div>
 
