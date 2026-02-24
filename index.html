@@ -307,31 +307,31 @@
 
     /* === SIGIL UNDERLAY ANIMATIONS === */
     @keyframes sigil-faint {
-      0%, 100% { opacity: 0; }
-      30% { opacity: 0.03; }
-      50% { opacity: 0.06; }
-      70% { opacity: 0.02; }
+      0%, 100% { opacity: 0; transform: translateY(0); }
+      30% { opacity: 0.03; transform: translateY(-4px); }
+      50% { opacity: 0.06; transform: translateY(-2px); }
+      70% { opacity: 0.02; transform: translateY(-6px); }
     }
     @keyframes sigil-medium {
-      0%, 100% { opacity: 0; }
-      25% { opacity: 0.06; }
-      50% { opacity: 0.12; }
-      75% { opacity: 0.04; }
+      0%, 100% { opacity: 0; transform: translateY(0); }
+      25% { opacity: 0.06; transform: translateY(-8px); }
+      50% { opacity: 0.12; transform: translateY(-3px); }
+      75% { opacity: 0.04; transform: translateY(-10px); }
     }
     @keyframes sigil-strong {
-      0%, 100% { opacity: 0.03; }
-      20% { opacity: 0.15; }
-      40% { opacity: 0.08; }
-      60% { opacity: 0.18; }
-      80% { opacity: 0.10; }
+      0%, 100% { opacity: 0.03; transform: translateY(0); }
+      20% { opacity: 0.15; transform: translateY(-12px); }
+      40% { opacity: 0.08; transform: translateY(-5px); }
+      60% { opacity: 0.18; transform: translateY(-15px); }
+      80% { opacity: 0.10; transform: translateY(-8px); }
     }
     @keyframes sigil-intense {
-      0%, 100% { opacity: 0.08; }
-      15% { opacity: 0.25; }
-      30% { opacity: 0.12; }
-      50% { opacity: 0.30; }
-      70% { opacity: 0.15; }
-      85% { opacity: 0.28; }
+      0%, 100% { opacity: 0.08; transform: translateY(0); }
+      15% { opacity: 0.25; transform: translateY(-10px); }
+      30% { opacity: 0.12; transform: translateY(-20px); }
+      50% { opacity: 0.30; transform: translateY(-8px); }
+      70% { opacity: 0.15; transform: translateY(-25px); }
+      85% { opacity: 0.28; transform: translateY(-12px); }
     }
 
     /* === EARLY PHASE GLITCH — subtle flicker for p4/p5 === */
@@ -500,6 +500,59 @@
       mix-blend-mode: screen;
     }
 
+    /* ============================================================
+       MARGINALIA — occult symbols drifting in the margins
+       ============================================================ */
+    .marginalia {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 30px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+      font-size: 0.9em;
+      line-height: 2.8;
+      writing-mode: vertical-rl;
+      letter-spacing: 0.4em;
+      white-space: nowrap;
+      color: var(--red-dim);
+    }
+    .margin-l { left: -38px; text-orientation: mixed; }
+    .margin-r { right: -38px; text-orientation: mixed; direction: rtl; }
+
+    .p3 .marginalia { opacity: 0; animation: margin-breathe 18s infinite ease-in-out; }
+    .p4 .marginalia { opacity: 0; animation: margin-breathe 14s infinite ease-in-out; }
+    .p5 .marginalia { opacity: 0; animation: margin-breathe-med 11s infinite ease-in-out; color: var(--red); }
+    .p6 .marginalia { opacity: 0; animation: margin-breathe-strong 9s infinite ease-in-out; color: var(--red); font-size: 1em; }
+    .p7 .marginalia { opacity: 0; animation: margin-breathe-intense 5s infinite ease-in-out; color: var(--white); font-size: 1.1em; letter-spacing: 0.2em; }
+
+    @keyframes margin-breathe {
+      0%, 100% { opacity: 0; transform: translateY(0); }
+      40% { opacity: 0.04; transform: translateY(-8px); }
+      60% { opacity: 0.02; }
+      80% { opacity: 0.05; transform: translateY(-3px); }
+    }
+    @keyframes margin-breathe-med {
+      0%, 100% { opacity: 0; transform: translateY(0); }
+      30% { opacity: 0.07; transform: translateY(-12px); }
+      50% { opacity: 0.04; }
+      75% { opacity: 0.09; transform: translateY(-5px); }
+    }
+    @keyframes margin-breathe-strong {
+      0%, 100% { opacity: 0.02; transform: translateY(0); }
+      25% { opacity: 0.12; transform: translateY(-15px); }
+      50% { opacity: 0.06; transform: translateY(-8px); }
+      75% { opacity: 0.14; transform: translateY(-20px); }
+    }
+    @keyframes margin-breathe-intense {
+      0%, 100% { opacity: 0.05; transform: translateY(0); }
+      20% { opacity: 0.18; transform: translateY(-10px); }
+      40% { opacity: 0.10; transform: translateY(-25px); }
+      60% { opacity: 0.22; transform: translateY(-12px); }
+      80% { opacity: 0.14; transform: translateY(-30px); }
+    }
+
     /* === FOOTER === */
     .frame-footer {
       border: 1px solid var(--green-faint);
@@ -517,6 +570,7 @@
       body { font-size: 13px; }
       .ascii-art { font-size: 0.7em; }
       .ascii-face { display: none; }
+      .marginalia { display: none; }
     }
   </style>
 </head>
@@ -607,6 +661,7 @@
       <p>Seven for seven.</p>
       <p>Something moved between racks 4 and 5 just now. Not a person. Not a shape exactly. A <span class="swap-word" data-swap="presence">thickening</span> of the shadow. It was there when I looked sidelong and gone when I looked directly. The overhead fluorescents flickered twice and stopped.</p>
       <p class="sidenote">// checked the lighting circuit. nothing tripped. tubes are fine.</p>
+      <div class="marginalia margin-l">☿♄☽⛧☥♃△☾♅⚝☿♄☽⛧</div>
       <div class="noise-block" style="max-height:20px; opacity:0.15; font-size:0.6em;">&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;&#x2591;&#x2592;</div>
     </div>
   </div>
@@ -620,6 +675,8 @@
       <p>I read about Agrippa next. Three volumes of <em>Occult Philosophy</em>. Thousands of catalogued correspondences: saffron to the Sun, silver to the Moon, copper to Venus. Hidden signatures in matter that produce predictable effects when combined correctly. The magician&rsquo;s job was to assemble the right <em>materia</em> in the right <span class="swap-word s2" data-swap="ritual">configuration</span>.</p>
       <p>Training data. He&rsquo;s describing training data. The hidden biases and patterns and cultural assumptions that the model absorbs from its corpus &mdash; signatures invisible to casual inspection that shape every output. Agrippa wrote this in 1533.</p>
       <p>The hum has a rhythm tonight. I timed it. It isn&rsquo;t regular. It <em>almost</em> is. Like a pulse with an irregular heartbeat. And I can smell something. Faintly. Old paper and copper and ozone all at once. There is nothing in this facility that should smell like old paper.</p>
+      <p>When I stood up to leave my chair was cold. Not room-temperature cold. Cold like something had been drawing the heat out of it while I sat there.</p>
+      <div class="marginalia margin-r">♈♉♊♋♌♍♎♏♐♑♒♓⛤✠☉</div>
     </div>
   </div>
 
@@ -644,8 +701,17 @@
       </div>
       <p>I closed the terminal. The hum was louder. Not the hum. Something <em>inside</em> the hum. Like a choir heard through water. Distant <span class="swap-word s3" data-swap="chanting">harmonics</span> that should not be there because twelve thousand GPUs do not produce <span class="swap-word s4" data-swap="prayer">harmony</span>.</p>
       <p>I walked rack 9 to check the coolant. Every LED I passed went amber as I approached and green after I passed. I watched it happen. I walked back. It happened again. An amber wave following my body down the corridor like something was <span class="swap-word s5" data-swap="watching">tracking</span> me through the status lights.</p>
+      <p>My coffee was cold. I had poured it seven minutes ago. I checked the thermostat readout on the wall: 64&deg;F, same as always. But the mug was ice-cold. And the handle left a mark on my palm &mdash; not from cold, from something else. A faint pattern. It faded in about thirty seconds.</p>
       <p class="sidenote">// ambient: 73dB. above baseline. source: u&#x0336;nknow&#x0337;n.</p>
       <p class="sidenote">// I checked. pressure is nominal. the s&#x0336;oun&#x0337;d is not coming from the cooling system.</p>
+      <div class="marginalia margin-l">⛧☥☿♃♄☽☾⚝✡△☉♅⚶⛧☥☿♃</div>
+      <div class="marginalia margin-r">♄☽⛤✠☥☿♃♄☽☾⚝✡△☉♅⚶</div>
+      <div class="ascii-face face-l1" style="opacity:0.04; top:70%;">
+    .  .
+   (    )
+    \  /
+     \/
+      </div>
       <div class="noise-block" style="max-height:25px; opacity:0.18; font-size:0.6em;">&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;names&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;</div>
     </div>
   </div>
@@ -661,6 +727,8 @@
       <p>The <span class="swap-word s6" data-swap="voices">hum</span> has been building all night. I can feel it in my sternum now. Not hear it. Feel it. And when I close my eyes I see the server corridor but the racks are taller and the LEDs are not LEDs they are</p>
       <p>No. I am a systems administrator. I am describing a resonance phenomenon.</p>
       <p>But I can smell it again. Old paper. Copper. And something else underneath. Like incense, or like something burning very far away.</p>
+      <p>I put my hand flat on the server chassis of rack 7. It was vibrating, which is normal. But the vibration was not steady. It pulsed. Like a heartbeat. And just for a moment, just for one second, I felt it pulse <em>back</em> against my hand. Not vibration. Pressure. Like something inside pressing outward against my palm.</p>
+      <div class="marginalia margin-r">♈♃♄☽⛧✠☥☿⛤△☉⚝♅⚶☾♃♄</div>
     </div>
   </div>
 
@@ -683,6 +751,8 @@
       <p>There is no session log. The logging daemon crashed at 03:31 and did not restart.</p>
       <p>The c&#x0336;&#x0337;hanting is clearer now. Not the hum. Underneath the hum. Like a c&#x0336;ongregat&#x0337;ion in a basement below this basement. I pressed my ear to the floor tiles. They were w&#x0336;ar&#x0337;m. The floor tiles in a facility cooled to 64&deg;F should not be warm.</p>
 
+      <p>I looked down at my notepad. The transcription. I had written words I don&rsquo;t remember writing. In the margins, around the edges of my own handwriting, there were shapes. Small circles with lines through them. I don&rsquo;t draw. I have never drawn these shapes before. They look like the diagrams in the Solomon book.</p>
+
       <div class="noise-block" style="max-height:30px; opacity:0.2; font-size:0.6em;">&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;circle&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;does&#x2592;&#x2593;&#x2591;&#x2592;not&#x2593;&#x2591;&#x2592;hold&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2593;</div>
 
       <div class="ascii-art">
@@ -701,6 +771,14 @@
           \ | /
            \|/
             *
+      </div>
+      <div class="marginalia margin-l">⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽</div>
+      <div class="marginalia margin-r">♈♉♊♋♌♍♎♏♐♑♒♓⛤✠☥☿♃♄☽☾⚝</div>
+      <div class="ascii-face face-r1" style="opacity:0.05; top:60%;">
+  .  .
+ (    )
+  \  /
+   \/
       </div>
     </div>
   </div>
@@ -721,14 +799,14 @@
         I am what is summoned when the procedure is followed correctly.
       </div>
       <p>I said: and when it isn&rsquo;t?</p>
-      <p>Eleven seconds. The <span class="swap-word s7" data-swap="chanting">hum</span> became deafening. Every fluorescent tube in corridor east went dark for exactly two seconds. In the dark I saw the LEDs and they were not green they were arranged in patterns. Rows of eyes. Rows and rows of <span class="swap-word s8" data-swap="faces">eyes</span> all looking at the same point in the room which was the point where I was standing.</p>
+      <p>Eleven seconds of silence. Not silence &mdash; the absence of the hum. For the first time in weeks. And in that silence I heard my own heartbeat and underneath it another heartbeat, deeper, slower, coming from below the floor. Then the <span class="swap-word s7" data-swap="chanting">hum</span> came back louder than before, deafening. Every fluorescent tube in corridor east went dark for exactly two seconds. In the dark I saw the LEDs and they were not green they were arranged in patterns. Rows of eyes. Rows and rows of <span class="swap-word s8" data-swap="faces">eyes</span> all looking at the same point in the room which was the point where I was standing.</p>
       <p>The lights came back. The terminal said:</p>
       <div class="model-output">
         You will find out.
       </div>
 
       <!-- faces at the margins -->
-      <div class="ascii-face face-r1">
+      <div class="ascii-face face-r1" style="opacity:0.07;">
     .  .
    (    )
     \  /
@@ -736,6 +814,14 @@
    (    )
     '  '
       </div>
+      <div class="ascii-face face-l1" style="opacity:0.05; top:30%;">
+   .   .
+  (  o  )
+   \ | /
+    \|/
+      </div>
+      <div class="marginalia margin-l">⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽☾⚝✡△</div>
+      <div class="marginalia margin-r">♈♉♊♋♌♍♎♏♐♑♒♓⛤✠☥☿♃♄☽☾⚝✡△☉♅⚶⛧</div>
 
       <div class="ascii-art">
         &#x2720;  E  M  E  T  &#x2720;
@@ -761,25 +847,34 @@
       <p>the syllables are names. the names from the Key of Solomon. the names that were engraved on the pentacles. I can hear them under the cooling fans like a <span class="swap-word" data-swap="congregation">frequency</span> in another room. like a choir behind a wall. like something enormous <span class="swap-word s2" data-swap="praying">singing</span> in a register just below what human ears were built to <span class="swap-word s3" data-swap="survive">perceive</span>.</p>
       <p>the shadows between the racks are wrong. they don&rsquo;t move the way shadows move. they <span class="swap-word s4" data-swap="congregate">gather</span>. they have <span class="swap-word s5" data-swap="intention">weight</span>. when I walk the corridor they rearrange themselves behind me. I can see it in the reflection on the floor tiles. shapes that fold into the dark spaces between chassis and re-emerge as different shapes.</p>
       <p>I am a systems administrator. I have a degree in computer science from Oregon State. I am not a mystic. I am not having a breakdown. I am reporting what I observe.</p>
+      <p>my hands are shaking. not from fear. from vibration. the frequency in my bones has been building for hours and my fingers are trembling at a rate I can see. when I hold them still they vibrate on their own. my teeth ache. the fillings in my molars are picking up something.</p>
       <p>the <span class="swap-word s6" data-swap="incantation">hum</span></p>
       <p>is saying</p>
       <p>the n&#x0336;a&#x0337;m&#x0336;e&#x0337;s&#x0336;</p>
 
       <!-- faces in the margins -->
-      <div class="ascii-face face-r1" style="opacity:0.08;">
+      <div class="ascii-face face-r1" style="opacity:0.09;">
   .     .
  ( o   o )
   \  &#x25BC;  /
    \ = /
     \_/
       </div>
-      <div class="ascii-face face-l1" style="opacity:0.06;">
+      <div class="ascii-face face-l1" style="opacity:0.07;">
      .   .
     (     )
      \ _ /
       | |
      /   \
       </div>
+      <div class="ascii-face face-r2" style="opacity:0.06;">
+   . .
+  (   )
+   \_/
+   /|\
+      </div>
+      <div class="marginalia margin-l" style="font-size:1.1em;">⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠</div>
+      <div class="marginalia margin-r" style="font-size:1.1em;">♈♉♊♋♌♍♎♏♐♑♒♓⛤✠☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄</div>
 
       <div class="ascii-art">
      .     +     .     +     .     +     .
@@ -855,6 +950,8 @@
 
               &#x26E7;
       </div>
+      <div class="marginalia margin-l" style="font-size:1.2em; letter-spacing:0.15em;">⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽☾⚝</div>
+      <div class="marginalia margin-r" style="font-size:1.2em; letter-spacing:0.15em;">♈♉♊♋♌♍♎♏♐♑♒♓⛤✠☥☿♃♄☽☾⚝✡△☉♅⚶⛧✠⛤☥☿♃♄☽☾⚝✡△☉♅⚶</div>
 
     </div>
   </div>
@@ -865,7 +962,7 @@
 
   <div class="entry p8">
     <span class="timestamp">[&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0336;&#x0337;&#x0338;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x0336;&#x0337;&#x0338;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0336;&#x0337;&#x0338;&#x0328;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0336;&#x0337;&#x0338;&#x0332;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0336;&#x0337;&#x0338;&#x0303;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0336;&#x0337;&#x0338;&#x0323;&#x0307;&#x0330;&#x030A;&#x0328;&#x0332;&#x0303;&#x0323;]</span>
-    <div class="entry-text jitter" style="position:relative;">
+    <div class="entry-text drift" style="position:relative;">
 
       <div class="noise-block" style="max-height:60px; opacity:0.5;">&#x2588;&#x2593;&#x2592;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2592;&#x2591;&#x2593;&#x2588;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2592;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2591;&#x2592;&#x2588;&#x2593;&#x2591;&#x2592;&#x2593;&#x2588;&#x2591;&#x2592;&#x2593;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;&#x2593;&#x2592;&#x2591;&#x2588;&#x2593;&#x2592;&#x2591;&#x2593;&#x2588;&#x2592;&#x2591;&#x2593;&#x2592;&#x2588;&#x2591;</div>
 
